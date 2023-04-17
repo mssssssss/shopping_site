@@ -6,7 +6,6 @@ import axios from "axios";
 import { reactLocalStorage } from "reactjs-localstorage";
 import "../../assets/css/order.css";
 
-
 const { Header, Content } = Layout;
 const headerStyle = {
   height: 32,

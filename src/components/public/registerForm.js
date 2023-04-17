@@ -3,37 +3,8 @@ import { Button, Checkbox, Form, Input, Select, message } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import throttle from "../../utils/throttle";
+import { formItemLayout, tailFormItemLayout } from "../../utils/formLayout";
 const { Option } = Select;
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 8,
-    },
-    sm: {
-      span: 24,
-      offset: 8,
-    },
-  },
-};
 
 export default function RegisterForm() {
   const [form] = Form.useForm();

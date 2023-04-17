@@ -52,24 +52,24 @@ const routes = [
   // 用户管理相关路由
   {
     name: "user",
-    path: "/user/*",
+    path: "/user",
     component: withLoading(<Main />),
     need: true,
-    permission: "0",
+    permission: 0,
     children: [
       {
         name: "user-index",
-        path: "/",
+        path: "",
         component: <Navigate to="/user/orderInfo"></Navigate>,
       },
       {
         name: "订单信息",
-        path: "/orderInfo",
+        path: "orderInfo",
         component: withLoading(<OrderInfo />),
       },
       {
         name: "个人信息",
-        path: "/personInfo",
+        path: "personInfo",
         component: withLoading(<PersonInfo />),
       },
     ],
@@ -78,31 +78,31 @@ const routes = [
   // 管理员相关路由
   {
     name: "admin",
-    path: "/admin/*",
+    path: "/admin",
     component: <Main />,
     need: true,
-    permission: "1",
+    permission: 1,
     children: [
       {
         name: "admin-index",
-        path: "/",
+        path: "",
         component: <Navigate to="/admin/userManage"></Navigate>,
       },
       {
         name: "用户管理",
-        path: "/userManage",
+        path: "userManage",
         component: withLoading(<UserManage />),
         isSubMenu: true, //标记为 是侧边栏菜单
       },
       {
         name: "订单管理",
-        path: "/orderManage",
+        path: "orderManage",
         component: withLoading(<OrderManage />),
         isSubMenu: true,
       },
       {
         name: "个人信息",
-        path: "/personInfo",
+        path: "personInfo",
         component: withLoading(<PersonInfo />),
       },
     ],

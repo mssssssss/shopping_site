@@ -16,7 +16,6 @@ export default function Main() {
 
   function handleClick(data) {
     console.log("0---" + data);
-    // console.log("Parent received value from child: " + data);
     // 修改aside侧边栏中collapsed的值
     setCollapsed(!data);
   }

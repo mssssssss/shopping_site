@@ -24,36 +24,27 @@ export default function LoginForm() {
     });
     // 登录失败
     if (data.code !== 200) {
-      // return alert(data.message);
       message.error(data.message);
       return;
     }
     // 登录成功
     // 并将用户名/token保存在cookie/localstorage中
-    console.log(data);
-    reactLocalStorage.setObject(
-      "token",
-      data.result[0].user_name
-      // JSON.stringify(data.result[0].user_name)
-    );
-    reactLocalStorage.setObject(
-      "role",
-      data.result[0].user_role
-      // JSON.stringify(data.result[0].user_role)
-    );
-    // 跳转到主页
+    reactLocalStorage.setObject("token", data.result[0].user_name);
+    reactLocalStorage.setObject("role", data.result[0].user_role);
+    // console.log(data.result[0].user_role === 0);
     message.info("登录成功");
-    console.log(data.result[0].user_role === 1);
     // 根据用户角色 如果是普通用户就跳到主页，而管理员就跳转到后台管理页
     if (data.result[0].user_role === 0) {
       setTimeout(() => {
         navigate("/");
       }, 1000);
     } else {
-      setTimeout(() => {
-        // navigate("/admin");
-        navigate("/admin/userManage");
-      }, 1000);
+      // setTimeout(() => {
+      //   navigate("/admin/userManage");
+      // }, 1000);
+      // navigate("/admin/userManage", { replace: true });
+      // window.location.reload();
+      window.location.href = "/admin/userManage";
     }
   };
 

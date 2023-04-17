@@ -6,23 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { reactLocalStorage } from "reactjs-localstorage";
 import userPic from "../../assets/images/head.jpg";
 import adminPic from "../../assets/images/bg.jpg";
+import { getItem } from "../../utils/formLayout";
 const { Header } = Layout;
-
-// 菜单设置
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
 
 // 头像栏下拉菜单
 const items = [getItem("个人信息", "/personInfo"), getItem("退出", "/exit")];
-const role = JSON.stringify(reactLocalStorage.getObject("role"));
-let flag = role === "0"; // 当前是否为普通用户
 const username = reactLocalStorage.getObject("token");
+const flag = reactLocalStorage.getObject("role") === 0; // 当前是否为普通用户
 export default function MyHeader({ onClick1 }) {
   // 控制菜单的折叠
   const [collapsed, setCollapsed] = useState(false);

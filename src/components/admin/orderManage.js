@@ -8,6 +8,8 @@ import {
 } from "@ant-design/icons";
 import OrderForm from "./orderForm";
 import axios from "axios";
+import { formatDate } from "../../utils/dateFormat";
+import { orderColumn } from "../../utils/tableColumns";
 const { Search } = Input;
 
 export default function OrderManage() {
@@ -16,113 +18,9 @@ export default function OrderManage() {
   const [loading, setLoading] = useState(false);
   const [init, setInit] = useState(null); // 表单的初始值
   // eslint-disable-next-line no-extend-native
-  Date.prototype.format = function (fmt) {
-    var o = {
-      "M+": this.getMonth() + 1, //月份
-      "d+": this.getDate(), //日
-      "h+": this.getHours(), //小时
-      "m+": this.getMinutes(), //分
-      "s+": this.getSeconds(), //秒
-      "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-      S: this.getMilliseconds(), //毫秒
-    };
-    if (/(y+)/.test(fmt)) {
-      fmt = fmt.replace(
-        RegExp.$1,
-        (this.getFullYear() + "").substr(4 - RegExp.$1.length)
-      );
-    }
-    for (var k in o) {
-      if (new RegExp("(" + k + ")").test(fmt)) {
-        fmt = fmt.replace(
-          RegExp.$1,
-          RegExp.$1.length == 1
-            ? o[k]
-            : ("00" + o[k]).substr(("" + o[k]).length)
-        );
-      }
-    }
-    return fmt;
-  };
-
   // 订单表格的列信息
-  const columns = [
-    {
-      title: "订单id",
-      dataIndex: "order_id",
-      key: "0",
-      width: 70,
-      sorter: (a, b) => a.order_id - b.order_id,
-    },
-    {
-      title: "用户id",
-      dataIndex: "user_id",
-      key: "1",
-      width: 70,
-      sorter: (a, b) => a.user_id - b.user_id,
-    },
-    {
-      title: "酒店id",
-      dataIndex: "hotel_id",
-      key: "2",
-      width: 70,
-      sorter: (a, b) => a.hotel_id - b.hotel_id,
-    },
-    {
-      title: "预定开始日期",
-      dataIndex: "start_date",
-      key: "3",
-      width: 110,
-      sorter: (a, b) => a.start_date.localeCompare(b.start_date),
-    },
-    {
-      title: "预定结束日期",
-      dataIndex: "end_date",
-      key: "4",
-      width: 110,
-      sorter: (a, b) => a.end_date.localeCompare(b.end_date),
-    },
-    {
-      title: "预定房间数量",
-      dataIndex: "room_num",
-      key: "5",
-      width: 100,
-      sorter: (a, b) => a.room_num - b.room_num,
-    },
-    {
-      title: "预订人姓名",
-      dataIndex: "guest_name",
-      key: "6",
-      width: 100,
-      sorter: (a, b) => {
-        if (a.guest_name.length !== b.guest_name.length) {
-          return a.guest_name.length - b.guest_name.length;
-        } else {
-          return a.guest_name.localeCompare(b.guest_name);
-        }
-      },
-    },
-    {
-      title: "预定人电话",
-      dataIndex: "guest_tel",
-      key: "7",
-      width: 100,
-      sorter: (a, b) => a.guest_tel.localeCompare(b.guest_tel),
-    },
-    {
-      title: "订单状态",
-      dataIndex: "order_state",
-      key: "8",
-      width: 90,
-      sorter: (a, b) => a.order_state - b.order_state,
-    },
-    {
-      title: "订单创建时间",
-      dataIndex: "create_time",
-      key: "9",
-      width: 120,
-      sorter: (a, b) => a.create_time.localeCompare(b.create_time),
-    },
+  const orderColumns = [
+    ...orderColumn,
     {
       title: "操作",
       dataIndex: "operation",
@@ -177,8 +75,8 @@ export default function OrderManage() {
             hotel_id: item.hotel_id,
             // start_date: new Date(item.start_date).format("yyyy-MM-dd hh:mm:ss"),
             // end_date: new Date(item.end_date).format("yyyy-MM-dd hh:mm:ss"),
-            start_date: new Date(item.start_date).format("yyyy-MM-dd"),
-            end_date: new Date(item.end_date).format("yyyy-MM-dd"),
+            start_date: formatDate(new Date(item.start_date), "yyyy-MM-dd"),
+            end_date: formatDate(new Date(item.end_date), "yyyy-MM-dd"),
             room_num: item.room_num,
             guest_name: item.guest_name,
             guest_tel: item.guest_tel,
@@ -188,7 +86,8 @@ export default function OrderManage() {
                 : item.order_state === 1
                 ? "已完成"
                 : "已取消", // 这个没确定好 0-待支付 1-已完成 2-已取消
-            create_time: new Date(item.create_time).format(
+            create_time: formatDate(
+              new Date(item.create_time),
               "yyyy-MM-dd hh:mm:ss"
             ),
           });
@@ -249,8 +148,8 @@ export default function OrderManage() {
               order_id: item.order_id,
               user_id: item.user_id,
               hotel_id: item.hotel_id,
-              start_date: new Date(item.start_date).format("yyyy-MM-dd"),
-              end_date: new Date(item.end_date).format("yyyy-MM-dd"),
+              start_date: formatDate(new Date(item.start_date), "yyyy-MM-dd"),
+              end_date: formatDate(new Date(item.end_date), "yyyy-MM-dd"),
               room_num: item.room_num,
               guest_name: item.guest_name,
               guest_tel: item.guest_tel,
@@ -260,7 +159,8 @@ export default function OrderManage() {
                   : item.order_state === 1
                   ? "已完成"
                   : "已取消", // 这个没确定好 0-待支付 1-已完成 2-已取消
-              create_time: new Date(item.create_time).format(
+              create_time: formatDate(
+                new Date(item.create_time),
                 "yyyy-MM-dd hh:mm:ss"
               ),
             });
@@ -290,7 +190,7 @@ export default function OrderManage() {
         enterButton
       />
       <Table
-        columns={columns}
+        columns={orderColumns}
         dataSource={datas}
         scroll={{
           x: 1800,

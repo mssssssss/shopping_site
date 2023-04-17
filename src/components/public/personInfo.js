@@ -3,26 +3,9 @@ import { Form, Input, message, Button } from "antd";
 import axios from "axios";
 import { useEffect } from "react";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { formItemLayout } from "../../utils/formLayout";
 import "../../assets/css/register.css";
-// 表单样式
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
+
 export default function PersonInfo() {
   const [form] = Form.useForm(); //当前表单
   const username = reactLocalStorage.getObject("token");

@@ -2,20 +2,8 @@ import { List, Button, Popconfirm, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { HomeFilled, QuestionCircleOutlined } from "@ant-design/icons";
 import { reactLocalStorage } from "reactjs-localstorage";
-import ErrorBoundary from "../../utils/errorBoundary";
+import { DateDiff } from "../../utils/dateFormat";
 import axios from "axios";
-
-// 计算两个日期之间相隔的天数
-function DateDiff(sDate1, sDate2) {
-  //sDate1和sDate2是2006-12-18格式
-  var aDate1, aDate2, oDate1, oDate2, iDays;
-  aDate1 = sDate1.split("-");
-  oDate1 = new Date(aDate1[1] + "/" + aDate1[2] + "/" + aDate1[0]);
-  aDate2 = sDate2.split("-");
-  oDate2 = new Date(aDate2[1] + "/" + aDate2[2] + "/" + aDate2[0]);
-  iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24);
-  return iDays;
-}
 
 const username = reactLocalStorage.getObject("token"); // 得到当前用户的用户名
 export default function OrderList({ type, amount }) {

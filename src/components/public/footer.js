@@ -22,8 +22,8 @@ export default function Footer() {
               <div className="p-a">
                 <a
                   target="_blank"
-                  rel="noreferrer"
                   href="https://you.ctrip.com/sitemap/"
+                  rel="noreferrer"
                 >
                   机票索引
                 </a>

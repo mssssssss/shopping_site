@@ -1,23 +1,13 @@
 // 后台管理主页面的侧边栏
 import { Layout, Menu } from "antd";
 import { SettingOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { getItem } from "../../utils/formLayout";
 const { Sider } = Layout;
 
-// 菜单设置
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-
-const role = JSON.stringify(reactLocalStorage.getObject("role"));
-let flag = role === "0"; // 当前是否为普通用户
+let flag = reactLocalStorage.getObject("role") === 0; // 当前是否为普通用户
 // 给不同用户传递不同的菜单信息
 let item = [];
 if (flag) {
@@ -72,8 +62,9 @@ export default function Aside({ col }) {
         onOpenChange={openChange}
         // 菜单内容
         items={item}
-        // 菜单被选中时调用
+        // 菜单被选中/点击时调用
         onSelect={selectItem}
+        onClick={selectItem}
       />
     </Sider>
   );

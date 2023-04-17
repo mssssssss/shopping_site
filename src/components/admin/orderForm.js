@@ -5,28 +5,10 @@ import "dayjs/locale/zh-cn";
 import locale from "antd/es/date-picker/locale/zh_CN";
 import axios from "axios";
 import { useEffect } from "react";
-
+import { formItemLayout } from "../../utils/formLayout";
+import { formatDate } from "../../utils/dateFormat";
+import "../../assets/css/register.css";
 const { Option } = Select;
-
-// 表单样式
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
 
 export default function UserForm({ open, init, tableData }) {
   const [form] = Form.useForm(); //当前表单
@@ -41,8 +23,8 @@ export default function UserForm({ open, init, tableData }) {
             order_id: item.order_id,
             user_id: item.user_id,
             hotel_id: item.hotel_id,
-            start_date: new Date(item.start_date).format("yyyy-MM-dd"),
-            end_date: new Date(item.end_date).format("yyyy-MM-dd"),
+            start_date: formatDate(new Date(item.start_date), "yyyy-MM-dd"),
+            end_date: formatDate(new Date(item.end_date), "yyyy-MM-dd"),
             room_num: item.room_num,
             guest_name: item.guest_name,
             guest_tel: item.guest_tel,
@@ -52,7 +34,8 @@ export default function UserForm({ open, init, tableData }) {
                 : item.order_state === 1
                 ? "已完成"
                 : "已取消", // 这个没确定好 0-待支付 1-已完成 2-已取消
-            create_time: new Date(item.create_time).format(
+            create_time: formatDate(
+              new Date(item.create_time),
               "yyyy-MM-dd hh:mm:ss"
             ),
           });

@@ -1,6 +1,7 @@
 // 登录页
 import bg from "../../assets/images/bg.jpg";
 import "../../assets/css/login.css";
+import "../../assets/css/register.css";
 import React from "react";
 import Header from "./header";
 import LoginForm from "./loginForm";

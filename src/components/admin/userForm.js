@@ -2,27 +2,9 @@
 import { Modal, Form, Input, Select, message } from "antd";
 import axios from "axios";
 import { useEffect } from "react";
-import "../../assets/css/register.css"
+import { formItemLayout } from "../../utils/formLayout";
+import "../../assets/css/register.css";
 const { Option } = Select;
-// 表单样式
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
 
 export default function UserForm({ title, type, open, init, tableData }) {
   const [form] = Form.useForm(); //当前表单

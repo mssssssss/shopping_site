@@ -8,6 +8,7 @@ import {
 } from "@ant-design/icons";
 import axios from "axios";
 import UserForm from "./userForm";
+import { userColumn } from "../../utils/tableColumns";
 const { Search } = Input;
 
 export default function UserManage() {
@@ -19,68 +20,8 @@ export default function UserManage() {
   const [init, setInit] = useState(null); // 表单的初始值
 
   // 用户表格的列信息
-  const columns = [
-    {
-      title: "用户id",
-      dataIndex: "user_id",
-      key: "-1",
-      width: 80,
-      sorter: (a, b) => a.user_id - b.user_id,
-    },
-    {
-      title: "用户身份",
-      dataIndex: "role",
-      key: "0",
-      width: 80,
-      sorter: (a, b) => b.role.localeCompare(a.role),
-    },
-    {
-      title: "用户名",
-      dataIndex: "username",
-      key: "1",
-      width: 80,
-      sorter: (a, b) => {
-        // 先按长度排 长度一样再按字典序排
-        if (a.username.length !== b.username.length) {
-          return a.username.length - b.username.length;
-        } else {
-          return a.username.localeCompare(b.username);
-        }
-      },
-    },
-    {
-      title: "密码",
-      dataIndex: "password",
-      key: "2",
-      width: 80,
-    },
-    {
-      title: "电话",
-      dataIndex: "phone",
-      key: "3",
-      width: 100,
-      sorter: (a, b) => a.phone.localeCompare(b.phone),
-    },
-    {
-      title: "邮箱",
-      dataIndex: "email",
-      key: "4",
-      width: 100,
-      sorter: (a, b) => {
-        if (a.email.length !== b.email.length) {
-          return a.email.length - b.email.length;
-        } else {
-          return a.email.localeCompare(b.email);
-        }
-      },
-    },
-    {
-      title: "余额",
-      dataIndex: "amount",
-      key: "5",
-      width: 60,
-      sorter: (a, b) => a.amount - b.amount,
-    },
+  const userColumns = [
+    ...userColumn,
     {
       title: "操作",
       dataIndex: "operation",
@@ -239,7 +180,7 @@ export default function UserManage() {
         enterButton
       />
       <Table
-        columns={columns}
+        columns={userColumns}
         dataSource={datas}
         scroll={{
           x: 1200,
