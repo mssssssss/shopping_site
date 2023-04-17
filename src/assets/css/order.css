@@ -1,0 +1,5 @@
+/* 用户的订单信息对应的样式 */
+.ant-tabs-tab {
+    width: 120px;
+    padding-left: 30px !important;
+}

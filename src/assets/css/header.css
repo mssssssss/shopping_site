@@ -1,0 +1,24 @@
+/* 登录/注册页面的顶部栏样式 */
+.top-content {
+    height: 72px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-logo {
+    margin-left: 40px;
+    margin-top: 12px;
+}
+
+.top-href {
+    margin-top: 26px;
+    margin-right: 40px;
+}
+
+.top-href a:hover {
+    color: #0086f6;
+}
+
+.top-href a:hover span {
+    color: #0086f6 !important;
+}

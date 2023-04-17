@@ -1,0 +1,45 @@
+.mid-content-2 {
+    width: 100%;
+    height: 550px;
+}
+
+.regi-form {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.register-item {
+    width: 320px;
+    height: 40px;
+    border-radius: 2px;
+}
+
+.ant-select-selector {
+    height: 40px !important;
+    border-radius: 2px !important;
+}
+
+
+
+.ant-select-selection-placeholder {
+    height: 40px !important;
+    line-height: 38px !important;
+    border-radius: 2px !important;
+}
+
+.ant-select-selection-item {
+    line-height: 38px !important;
+}
+
+#register_phone {
+    width: 250px;
+    height: 40px;
+    border-radius: 2px;
+}
+
+.register-btn {
+    width: 320px;
+    height: 40px;
+    border-radius: 6px;
+    /* background-color: rgb(255, 154, 20); */
+}
