@@ -43,6 +43,13 @@ const orderColumn = [
     sorter: (a, b) => a.room_num - b.room_num,
   },
   {
+    title: "订单金额",
+    dataIndex: "price",
+    key: "5",
+    width: 100,
+    sorter: (a, b) => a.price - b.price,
+  },
+  {
     title: "预订人姓名",
     dataIndex: "guest_name",
     key: "6",

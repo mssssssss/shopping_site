@@ -78,6 +78,7 @@ export default function OrderManage() {
             start_date: formatDate(new Date(item.start_date), "yyyy-MM-dd"),
             end_date: formatDate(new Date(item.end_date), "yyyy-MM-dd"),
             room_num: item.room_num,
+            price: item.price,
             guest_name: item.guest_name,
             guest_tel: item.guest_tel,
             order_state:
@@ -151,6 +152,7 @@ export default function OrderManage() {
               start_date: formatDate(new Date(item.start_date), "yyyy-MM-dd"),
               end_date: formatDate(new Date(item.end_date), "yyyy-MM-dd"),
               room_num: item.room_num,
+              price: item.price,
               guest_name: item.guest_name,
               guest_tel: item.guest_tel,
               order_state:

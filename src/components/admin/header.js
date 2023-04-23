@@ -10,7 +10,11 @@ import { getItem } from "../../utils/formLayout";
 const { Header } = Layout;
 
 // 头像栏下拉菜单
-const items = [getItem("个人信息", "/personInfo"), getItem("退出", "/exit")];
+const items = [
+  getItem("回到主页", "/"),
+  getItem("个人信息", "/personInfo"),
+  getItem("退出", "/exit"),
+];
 const username = reactLocalStorage.getObject("token");
 const flag = reactLocalStorage.getObject("role") === 0; // 当前是否为普通用户
 export default function MyHeader({ onClick1 }) {
@@ -28,6 +32,9 @@ export default function MyHeader({ onClick1 }) {
       // 清空登录信息 并跳转到登录页面
       reactLocalStorage.clear();
       navigate("/login", { replace: true });
+      return;
+    } else if (key === "/") {
+      navigate("/", { replace: true });
       return;
     }
     if (flag) {

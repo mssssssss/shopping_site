@@ -15,6 +15,7 @@ export default function LoginForm() {
     console.log("Success:", values); //values即为表单信息
     // 验证用户名是否存在
     // 以及验证用户名和密码是否对应上了
+    // let { data } = await axios.get("http://localhost:5000/checkLogin", {
     let { data } = await axios.get("/api/checkLogin", {
       params: {
         username: values.username,

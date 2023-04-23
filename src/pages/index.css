@@ -1,0 +1,22 @@
+.sortNav {
+    display: flex;
+    margin-bottom: 8px;
+    margin-left: 22px;
+}
+
+.sortWay {
+    padding: 0px 30px;
+    border-right: 1px solid #ccc
+}
+
+.sortWay:nth-last-child(1) {
+    border-right: none;
+}
+
+.link_active {
+    color: #0086f6 !important;
+}
+
+.link_unactive {
+    color: #333;
+}

@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import React from "react";
-import Index from "../components/user/index";
+// import Index from "../components/user/index";
+import Index from "../pages/index";
 import withLoading from "../utils/withLoading";
 // 懒加载路由
 const Register = React.lazy(() => import("../components/public/register"));
@@ -11,6 +12,9 @@ const UserManage = React.lazy(() => import("../components/admin/userManage"));
 const OrderManage = React.lazy(() => import("../components/admin/orderManage"));
 const PersonInfo = React.lazy(() => import("../components/public/personInfo"));
 const OrderInfo = React.lazy(() => import("../components/user/orderInfo"));
+const Detail = React.lazy(() => import("../pages/detail"));
+const Order = React.lazy(() => import("../pages/order"));
+const Pay = React.lazy(() => import("../pages/pay"));
 
 // 路由配置信息
 const routes = [
@@ -41,6 +45,26 @@ const routes = [
     path: "/login",
     component: withLoading(<Login />),
     need: false,
+  },
+  {
+    name: "detail",
+    path: "/detail/:id",
+    component: withLoading(<Detail />),
+    need: false,
+  },
+  {
+    name: "order",
+    path: "/order/:id",
+    component: withLoading(<Order />),
+    need: true,
+    permission: 0,
+  },
+  {
+    name: "pay",
+    path: "/pay/:id",
+    component: withLoading(<Pay />),
+    need: true,
+    permission: 0,
   },
   {
     name: "notFound",
