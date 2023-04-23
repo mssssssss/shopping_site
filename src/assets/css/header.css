@@ -3,6 +3,7 @@
     height: 72px;
     display: flex;
     justify-content: space-between;
+    background-color: #fff;
 }
 
 .top-logo {
@@ -21,4 +22,8 @@
 
 .top-href a:hover span {
     color: #0086f6 !important;
+}
+
+.anticon-home svg {
+    margin-top: -8px;
 }

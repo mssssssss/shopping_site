@@ -10,7 +10,8 @@ import { useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import { UserContext } from "../context/userContext";
 import { reactLocalStorage } from "reactjs-localstorage";
-import { message } from "antd";
+import { Divider, message } from "antd";
+import Head from "./head";
 
 const Pay = () => {
   const navigate = useNavigate();
@@ -114,82 +115,75 @@ const Pay = () => {
 
   return (
     <div>
-      <Navbar bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand>安全支付</Navbar.Brand>
-          <Button variant="primary" href="/orderInfo">
-            全部订单
-          </Button>
-        </Container>
-      </Navbar>
-      <Card>
+      <Head></Head>
+      <Card
+        style={{
+          border: "none",
+          backgroundColor: "rgb(246, 248, 250)",
+          paddingTop: "20px",
+          // marginBottom: "-50px",
+          height: "calc(100% - 95px)",
+        }}
+      >
         <Card.Body>
           <Container>
-            <Row>
-              <Col style={{ position: "relative", height: "10rem" }}>
-                <h6
+            <div
+              style={{
+                backgroundColor: "#fff",
+                padding: "20px",
+                borderRadius: "15px",
+                marginTop: "20px",
+              }}
+            >
+              <h3>订单信息确认：</h3>
+              <div style={{ height: 30, lineHeight: "30px" }}>
+                预约酒店：{order.hotel_name}
+              </div>
+              <div style={{ height: 30, lineHeight: "30px" }}>
+                预约时间：{order.start_date} ~ {order.end_date}
+              </div>
+              <div style={{ height: 30, lineHeight: "30px" }}>
+                预订房间数：{order.room_num}
+              </div>
+              <div style={{ height: 30, lineHeight: "30px" }} s>
+                预订人电话：{order.guest_tel}
+              </div>
+            </div>
+            <div
+              style={{
+                backgroundColor: "#fff",
+                padding: "20px",
+                borderRadius: "15px",
+                marginTop: "25px",
+                marginBottom: "62px",
+              }}
+            >
+              <h3>付款信息确认：</h3>
+              <div style={{ height: 40, lineHeight: "40px" }}>
+                <span style={{ fontSize: 18 }}>订单金额：</span>
+                <span
                   style={{
-                    position: "absolute",
-                    left: "1rem",
-                    top: "3rem",
-                    display: "inline-block",
-                  }}
-                >
-                  订单金额
-                </h6>
-                <h3
-                  style={{
-                    position: "absolute",
-                    left: "5rem",
-                    top: "2.5rem",
-                    display: "inline-block",
+                    fontSize: 24,
                     color: "#0d6efd",
                   }}
                 >
                   ￥{order.price}
-                </h3>
-              </Col>
-              <Col
-                style={{
-                  position: "relative",
-                  height: "10rem",
-                  borderLeft: "1px solid gray",
-                }}
-              >
-                <h5
-                  style={{
-                    position: "absolute",
-                    left: "2rem",
-                    top: "2.5rem",
-                    display: "inline-block",
-                  }}
-                >
-                  {order.hotel_name}
-                </h5>
+                </span>
+              </div>
+
+              <div style={{ height: 60, lineHeight: "60px" }}>
                 <Button
                   variant="light"
-                  style={{
-                    position: "absolute",
-                    bottom: "1rem",
-                    right: "5rem",
-                  }}
                   onClick={handleCancel}
+                  style={{ marginRight: "15px" }}
                 >
                   取消订单
                 </Button>
-                <Button
-                  variant="primary"
-                  style={{
-                    position: "absolute",
-                    bottom: "1rem",
-                    right: "1rem",
-                  }}
-                  onClick={handlePay}
-                >
-                  支付
+                <Button variant="primary" onClick={handlePay}>
+                  支付订单
                 </Button>
-              </Col>
-            </Row>
+              </div>
+            </div>
           </Container>
         </Card.Body>
       </Card>

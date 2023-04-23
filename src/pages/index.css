@@ -1,16 +1,19 @@
 .sortNav {
     display: flex;
+    margin-top: 5px;
     margin-bottom: 8px;
-    margin-left: 22px;
+    margin-left: 40px;
+    /* line-height: 40px; */
 }
 
 .sortWay {
     padding: 0px 30px;
-    border-right: 1px solid #ccc
+    border-right: 1px solid #ccc;
+    margin-top: 4px
 }
 
-.sortWay:nth-last-child(1) {
-    border-right: none;
+.sortNav>.sortWay:nth-child(3) {
+    border-right: none !important;
 }
 
 .link_active {
@@ -19,4 +22,40 @@
 
 .link_unactive {
     color: #333;
+}
+
+.ant-list-item {
+    margin-left: 26px;
+    margin-right: 20px;
+}
+
+.desc {
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.detailButton {
+    color: #fff !important;
+    float: right;
+
+}
+
+.detailButton a:hover {
+    color: #fff !important;
+}
+
+.anticon-like svg {
+    margin-top: -10px;
+    margin-left: 6px
+}
+
+.hotelTitle {
+    cursor: pointer
+}
+
+.hotelTitle:hover {
+    color: #0086f6
 }

@@ -168,110 +168,139 @@ const Order = () => {
     }, 1000);
   };
   return (
-    <div>
+    <div style={{ backgroundColor: "rgb(246, 248, 250)" }}>
       <Head></Head>
-      <Card>
-        <Card.Body>
-          <h1>{hotel.hotel_name}</h1>
-          <h5 style={{ color: "GrayText" }}>酒店位置：{hotel.location}</h5>
-        </Card.Body>
-      </Card>
-      <Card>
-        <Card.Body>
-          <h1>入住信息</h1>
-          <InputGroup size="lg" style={{ position: "relative" }}>
-            <InputGroup.Text id="inputGroup-sizing-default">
-              入住时间
-            </InputGroup.Text>
-            <Space direction="vertical">
-              <DatePicker
-                disabledDate={disabledDate}
-                style={{
-                  position: "absolute",
-                  height: "100%",
-                }}
-                locale={locale}
-                onChange={handleDate}
+      <div style={{ width: "90%", margin: "0 auto" }}>
+        <Card style={{ border: "none", marginTop: "20px" }}>
+          <Card.Body>
+            <p style={{ fontSize: "24px" }}>酒店信息</p>
+            <p style={{ color: "GrayText" }}>酒店名：{hotel.hotel_name}</p>
+            <p style={{ color: "GrayText" }}>酒店位置：{hotel.location}</p>
+          </Card.Body>
+        </Card>
+        <Card style={{ border: "none", marginTop: "20px" }}>
+          <Card.Body>
+            <p style={{ fontSize: "24px" }}>入住信息</p>
+            <InputGroup size="md" style={{ position: "relative" }}>
+              <InputGroup.Text
+                id="inputGroup-sizing-default"
+                style={{ width: "10rem" }}
               >
-                选择入住日期
-              </DatePicker>
-            </Space>
-          </InputGroup>
-          <br></br>
-          <InputGroup size="lg">
-            <InputGroup.Text id="inputGroup-sizing-default">
-              预定房间数
-            </InputGroup.Text>
-            <InputNumber
-              name="roomNum"
-              min={0}
-              max={maxNumRef.current}
-              defaultValue={0}
-              onChange={handleNum}
+                入住时间
+              </InputGroup.Text>
+              <Space direction="vertical">
+                <DatePicker
+                  disabledDate={disabledDate}
+                  style={{
+                    position: "absolute",
+                    height: "100%",
+                    width: "20rem",
+                    borderTopLeftRadius: 0,
+                    borderBottomLeftRadius: 0,
+                  }}
+                  locale={locale}
+                  onChange={handleDate}
+                >
+                  选择入住日期
+                </DatePicker>
+              </Space>
+            </InputGroup>
+            <br></br>
+            <InputGroup size="md">
+              <InputGroup.Text
+                id="inputGroup-sizing-default"
+                style={{ width: "10rem" }}
+              >
+                预定房间数
+              </InputGroup.Text>
+              <InputNumber
+                name="roomNum"
+                min={0}
+                max={maxNumRef.current}
+                defaultValue={0}
+                onChange={handleNum}
+                style={{ width: "20rem" }}
+              />
+            </InputGroup>
+            <br></br>
+            <InputGroup size="md" style={{ width: "30rem" }}>
+              <InputGroup.Text
+                id="inputGroup-sizing-default"
+                style={{ width: "10rem" }}
+              >
+                住客姓名
+              </InputGroup.Text>
+              <Form.Control
+                aria-label="Default"
+                aria-describedby="inputGroup-sizing-default"
+                name="guestName"
+                onChange={handleChange}
+              />
+            </InputGroup>
+            <br></br>
+            <InputGroup size="md" style={{ width: "30rem" }}>
+              <InputGroup.Text
+                id="inputGroup-sizing-default"
+                style={{ width: "10rem" }}
+              >
+                电话号码
+              </InputGroup.Text>
+              <Form.Control
+                aria-label="Default"
+                aria-describedby="inputGroup-sizing-default"
+                name="guestTel"
+                onChange={handleChange}
+              />
+            </InputGroup>
+          </Card.Body>
+        </Card>
+        <Card
+          style={{
+            border: "none",
+            marginTop: "20px",
+            marginBottom: "5px",
+            position: "relative",
+            height: "6rem",
+          }}
+        >
+          <Card.Body>
+            <div
               style={{
-                fontSize: "1.5rem",
-                textAlign: "center",
+                position: "absolute",
+                left: "1rem",
+                top: "1.5rem",
+                display: "inline-block",
               }}
-            />
-          </InputGroup>
-          <br></br>
-          <InputGroup size="lg">
-            <InputGroup.Text id="inputGroup-sizing-default">
-              住客姓名
-            </InputGroup.Text>
-            <Form.Control
-              aria-label="Default"
-              aria-describedby="inputGroup-sizing-default"
-              name="guestName"
-              onChange={handleChange}
-            />
-          </InputGroup>
-          <br></br>
-          <InputGroup size="lg">
-            <InputGroup.Text id="inputGroup-sizing-default">
-              电话号码
-            </InputGroup.Text>
-            <Form.Control
-              aria-label="Default"
-              aria-describedby="inputGroup-sizing-default"
-              name="guestTel"
-              onChange={handleChange}
-            />
-          </InputGroup>
-        </Card.Body>
-      </Card>
-      <Card style={{ position: "relative", height: "6rem" }}>
-        <Card.Body>
-          <h6
-            style={{
-              position: "absolute",
-              left: "1rem",
-              top: "2rem",
-              display: "inline-block",
-            }}
-          >
-            在线付:￥{hotel.new_price}*{roomNum}
-          </h6>
-          <h3
-            style={{
-              position: "absolute",
-              right: "10rem",
-              top: "2rem",
-              display: "inline-block",
-              color: "#0d6efd",
-            }}
-          >
-            ￥{total}
-          </h3>
-          <Button
-            variant="primary"
-            style={{ position: "absolute", bottom: "1rem", right: "1rem" }}
-            onClick={handleSubmit}
-          >
-            提交订单
-          </Button>
-        </Card.Body>
-      </Card>
+            >
+              在线付:
+              <span style={{ color: "#0d6efd", fontSize: "2rem" }}>
+                ￥{hotel.new_price}
+              </span>
+              <span>*{roomNum}</span>
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                right: "10rem",
+                top: "1.5rem",
+                display: "inline-block",
+              }}
+            >
+              在线付:
+              <span style={{ color: "#0d6efd", fontSize: "2rem" }}>
+                ￥{total}
+              </span>
+            </div>
+            <Button
+              variant="primary"
+              style={{ position: "absolute", top: "2.2rem", right: "1.2rem" }}
+              onClick={handleSubmit}
+            >
+              提交订单
+            </Button>
+          </Card.Body>
+        </Card>
+      </div>
     </div>
   );
 };

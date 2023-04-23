@@ -31,12 +31,12 @@ export default function Head() {
   return (
     <div className="top-content">
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
-      <div className="top-logo">
+      <div className="top-logo" style={{ marginLeft: 60 }}>
         <NavLink to="/">
           <img src={logo} alt="website's logo" />
         </NavLink>
       </div>
-      <div className="top-href">
+      <div className="top-href" style={{ marginRight: 80 }}>
         {token && role === 0 ? (
           <div>
             <Dropdown menu={{ items, onClick }}>

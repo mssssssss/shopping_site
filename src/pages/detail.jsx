@@ -8,6 +8,11 @@ import Badge from "react-bootstrap/Badge";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
+import {
+  PhoneOutlined,
+  EnvironmentOutlined,
+  MessageOutlined,
+} from "@ant-design/icons";
 
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useEffect, useContext } from "react";
@@ -16,6 +21,8 @@ import { useState } from "react";
 import axios from "axios";
 // import { UserContext } from "../context/userContext";
 import Head from "./head";
+import "./detail.css";
+import { Tag } from "antd";
 
 const Index = () => {
   const [hotel, setHotel] = useState([]);
@@ -46,86 +53,99 @@ const Index = () => {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: "rgb(246, 248, 250)" }}>
       <Head></Head>
-      <Card>
-        <Card.Body>
-          <Row>
-            <Col sm={8}>
-              <h1>{hotel.hotel_name}</h1>
-              <h5 style={{ color: "GrayText" }}>酒店电话：{hotel.hotel_tel}</h5>
-              <h5 style={{ color: "GrayText" }}>酒店位置：{hotel.location}</h5>
-              <h5 style={{ color: "GrayText" }}>
-                酒店详情：{hotel.description}
-              </h5>
-              {hotel.image_src ? (
-                <Row>
-                  <Col xs={6} md={4}>
-                    <Image
-                      src={require(`../img/${hotel.image_src}/1.jpg`)}
-                      style={{ width: "100%" }}
-                    />
-                  </Col>
-                  <Col xs={6} md={4}>
-                    <Image
-                      src={require(`../img/${hotel.image_src}/2.jpg`)}
-                      style={{ width: "100%" }}
-                    />
-                  </Col>
-                  <Col xs={6} md={4}>
-                    <Image
-                      src={require(`../img/${hotel.image_src}/3.jpg`)}
-                      style={{ width: "100%" }}
-                    />
-                  </Col>
-                </Row>
-              ) : (
-                <></>
-              )}
-            </Col>
-            <Col
-              sm={4}
-              style={{ position: "relative", borderLeft: "1px solid gray" }}
-            >
-              <h4 style={{ position: "absolute", top: "1rem", right: "1rem" }}>
-                评分：<Badge bg="primary">{hotel.star_score}</Badge>
-              </h4>
+      <div
+        style={{
+          width: "90%",
+          margin: "0 auto",
+        }}
+      >
+        <div style={{ marginTop: 20, marginBottom: 20 }}>
+          <Card style={{ border: "none" }}>
+            <Card.Body style={{ padding: "20px 40px ", minHeight: "220px" }}>
+              <div style={{ display: "flex" }}>
+                <div style={{ flex: 1 }}>
+                  <p class="hotel_name">{hotel.hotel_name}</p>
+                  <div class="hotel_label">
+                    <PhoneOutlined />
+                    酒店电话：{hotel.hotel_tel}
+                  </div>
+                  <div class="hotel_label">
+                    <EnvironmentOutlined />
+                    酒店位置：{hotel.location}
+                  </div>
+                  <div class="hotel_label">
+                    <MessageOutlined />
+                    酒店详情：{hotel.description}
+                  </div>
+                </div>
+                <div style={{ width: 200, textAlign: "right" }}>
+                  <p style={{}}>
+                    评分：<Badge bg="primary">{hotel.star_score}</Badge>
+                  </p>
+                  <p>
+                    <span
+                      style={{
+                        color: "gray",
+                        textDecoration: "line-through",
+                      }}
+                    >
+                      ￥{hotel.old_price}
+                    </span>
+                    <span
+                      style={{
+                        color: "#0d6efd",
+                        fontSize: "20px",
+                      }}
+                    >
+                      ￥{hotel.new_price}
+                    </span>
+                  </p>
 
-              <h4
-                style={{
-                  position: "absolute",
-                  top: "7rem",
-                  right: "6rem",
-                  color: "gray",
-                  textDecoration: "line-through",
-                }}
-              >
-                ￥{hotel.old_price}
-              </h4>
-              <h3
-                style={{
-                  position: "absolute",
-                  top: "7rem",
-                  right: "1rem",
-                  color: "#0d6efd",
-                }}
-              >
-                ￥{hotel.new_price}
-              </h3>
-              <Button
-                on
-                variant="primary"
-                style={{ position: "absolute", bottom: "1rem", right: "1rem" }}
-                href={`/order/${hotelId}`}
-              >
-                预定
-              </Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
+                  <Button
+                    style={{ marginTop: 25 }}
+                    variant="primary"
+                    className="detailButton"
+                    href={`/order/${hotelId}`}
+                  >
+                    去预定
+                  </Button>
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
+        </div>
+        <div>
+          <Card style={{ border: "none", padding: "20px 40px" }}>
+            {/* <div> */}
+            <p class="hotel_name">图片展示：</p>
+            {hotel.image_src ? (
+              <>
+                <Image
+                  className="disPic"
+                  src={require(`../img/${hotel.image_src}/1.jpg`)}
+                />
+                <Image
+                  className="disPic"
+                  src={require(`../img/${hotel.image_src}/2.jpg`)}
+                />
+                <Image
+                  className="disPic"
+                  src={require(`../img/${hotel.image_src}/3.jpg`)}
+                />
+                <Image
+                  className="disPic"
+                  src={require(`../img/${hotel.image_src}/4.jpg`)}
+                />
+              </>
+            ) : (
+              ""
+            )}
+          </Card>
+        </div>
+      </div>
     </div>
   );
 };
-
 export default Index;

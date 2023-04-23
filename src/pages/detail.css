@@ -1,0 +1,29 @@
+.detailButton {
+    /* position: absolute;
+    top: 9rem;
+    right: 1rem; */
+    color: #fff !important;
+}
+
+.hotel_name {
+    font-size: 20px;
+}
+
+.hotel_label {
+    color: "GrayText";
+    height: 25px;
+    line-height: 25px;
+}
+
+.disPic {
+    width: 100%;
+    border-radius: 2px;
+    margin: 0 auto;
+}
+
+.anticon-phone svg,
+.anticon-environment svg,
+.anticon-message svg {
+    margin-top: -5px;
+    margin-right: 10px;
+}

@@ -164,7 +164,7 @@ export default function OrderList({ type, amount }) {
                 <div style={{ marginTop: 40, marginBottom: 10 }}>
                   <Popconfirm
                     title="Delete"
-                    description="您确定要删除这个订单吗?"
+                    description="您确定要取消这个订单吗?"
                     icon={<QuestionCircleOutlined style={{ color: "red" }} />}
                     onConfirm={(e) => {
                       cancelOrder(item.order_id);
@@ -196,7 +196,7 @@ export default function OrderList({ type, amount }) {
         >
           <List.Item.Meta
             avatar={<HomeFilled style={{ color: "rgb(22, 119, 255)" }} />}
-            title={<a href={item.href}>{item.hotel_name}</a>}
+            title={<a href={`/detail/${item.hotel_id}`}>{item.hotel_name}</a>}
             style={{ marginBottom: "0px !important" }}
           />
           <div style={{ color: "rgba(0, 0, 0, 0.45)", marginTop: "-20px" }}>
