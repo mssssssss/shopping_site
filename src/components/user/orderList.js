@@ -119,7 +119,7 @@ export default function OrderList({ type, amount }) {
 
   useEffect(() => {
     getOrderInfo();
-  }, []);
+  });
 
   return (
     // <ErrorBoundary>
