@@ -129,7 +129,11 @@ const Order = () => {
     if (!date.length) return alert("请填写入住时间");
     if (roomNum.length === 0 || roomNum === 0) return alert("请填写预定房间数");
     if (!guest.guestName) return alert("请填写住客姓名");
-    if (!guest.guestTel) return alert("请填写电话号码");
+    var reg_tel =
+      /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/; //11位手机号码正则
+    if (!guest.guestTel || !guest.guestTel.match(reg_tel))
+      return alert("请填写正确的电话号码");
+    // if (!guest.guestTel) return alert("请填写电话号码");
     if (userMoneyRef.current < total) return alert("您的余额不足！");
     console.log("****" + currentUser.user_id);
     // 创建订单
