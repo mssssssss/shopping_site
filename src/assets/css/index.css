@@ -43,7 +43,7 @@
 
 }
 
-.detailButton a:hover {
+.detailButton:hover {
     color: #fff !important;
 }
 

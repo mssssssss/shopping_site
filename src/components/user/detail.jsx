@@ -1,37 +1,27 @@
-import React from "react";
+import React, { createRef } from "react";
 import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
-import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
 import {
   PhoneOutlined,
   EnvironmentOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
 
-import { useNavigate, useLocation, Link } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { useState } from "react";
-//import { LinkuseLocation } from "react-router-dom";
 import axios from "axios";
-// import { UserContext } from "../context/userContext";
 import Head from "./head";
-import "./detail.css";
-import { Tag } from "antd";
+import Footer from "./footer";
+import "../../assets/css/detail.css";
+import holderImg from "../../assets/images/placeholder.gif";
 
 const Index = () => {
   const [hotel, setHotel] = useState([]);
 
   const location = useLocation();
-
-  const navigate = useNavigate();
-
-  // const { currentUser, logout } = useContext(UserContext);
 
   const hotelId = location.pathname.split("/")[2];
 
@@ -47,9 +37,34 @@ const Index = () => {
     fetchData();
   }, [hotelId]);
 
-  const handleLogout = (e) => {
-    // logout();
-    navigate("/");
+  // 实现图片懒加载：只有图片在可视化区域内，才去加载图片
+  useEffect(() => {
+    // 页面刚加载时 也要显示可视化区域的图片
+    setTimeout(() => {
+      checkImages();
+    }, 1);
+    window.addEventListener("scroll", checkImages);
+    return () => {
+      // 注意在销毁阶段取消监听，减少页面负担
+      window.removeEventListener("scroll", checkImages);
+    };
+  });
+
+  const checkImages = () => {
+    // 将dom类数组转换为数组
+    var imgs = Array.prototype.slice
+      .call(document.querySelectorAll("img"))
+      .slice(2);
+    console.log(imgs);
+    let offsetHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+    for (let i = 0; i < imgs.length; i++) {
+      console.log(imgs[i].getBoundingClientRect().top);
+      console.log(offsetHeight);
+      if (imgs[i].getBoundingClientRect().top <= offsetHeight) {
+        imgs[i].src = imgs[i].getAttribute("datasrc"); //将真实图片地址赋给src
+      }
+    }
   };
 
   return (
@@ -59,11 +74,12 @@ const Index = () => {
         style={{
           width: "90%",
           margin: "0 auto",
+          marginBottom: 30,
         }}
       >
         <div style={{ marginTop: 20, marginBottom: 20 }}>
           <Card style={{ border: "none" }}>
-            <Card.Body style={{ padding: "20px 40px ", minHeight: "220px" }}>
+            <Card.Body style={{ padding: "20px 40px " }}>
               <div style={{ display: "flex" }}>
                 <div style={{ flex: 1 }}>
                   <p class="hotel_name">{hotel.hotel_name}</p>
@@ -75,7 +91,7 @@ const Index = () => {
                     <EnvironmentOutlined />
                     酒店位置：{hotel.location}
                   </div>
-                  <div class="hotel_label">
+                  <div class="hotel_label" style={{ height: "auto" }}>
                     <MessageOutlined />
                     酒店详情：{hotel.description}
                   </div>
@@ -118,25 +134,32 @@ const Index = () => {
         </div>
         <div>
           <Card style={{ border: "none", padding: "20px 40px" }}>
-            {/* <div> */}
             <p class="hotel_name">图片展示：</p>
             {hotel.image_src ? (
               <>
                 <Image
                   className="disPic"
-                  src={require(`../img/${hotel.image_src}/1.jpg`)}
+                  src={holderImg}
+                  datasrc={require(`../../assets/images/${hotel.image_src}/1.jpg`)}
+                  // src={require(`../../assets/images/${hotel.image_src}/1.jpg`)}
                 />
                 <Image
                   className="disPic"
-                  src={require(`../img/${hotel.image_src}/2.jpg`)}
+                  src={holderImg}
+                  datasrc={require(`../../assets/images/${hotel.image_src}/2.jpg`)}
+                  // src={require(`../../assets/images/${hotel.image_src}/2.jpg`)}
                 />
                 <Image
                   className="disPic"
-                  src={require(`../img/${hotel.image_src}/3.jpg`)}
+                  // src={require(`../../assets/images/${hotel.image_src}/3.jpg`)}
+                  src={holderImg}
+                  datasrc={require(`../../assets/images/${hotel.image_src}/3.jpg`)}
                 />
                 <Image
                   className="disPic"
-                  src={require(`../img/${hotel.image_src}/4.jpg`)}
+                  // src={require(`../../assets/images/${hotel.image_src}/4.jpg`)}
+                  src={holderImg}
+                  datasrc={require(`../../assets/images/${hotel.image_src}/4.jpg`)}
                 />
               </>
             ) : (
@@ -145,6 +168,7 @@ const Index = () => {
           </Card>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

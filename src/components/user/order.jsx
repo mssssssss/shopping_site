@@ -3,17 +3,10 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { useState, useRef } from "react";
-import { useNavigate, useLocation, Link, Navigate } from "react-router-dom";
-//import { LinkuseLocation } from "react-router-dom";
-import axios from "axios";
-import { UserContext } from "../context/userContext";
-
-import { DatePicker, Space, InputNumber, Input } from "antd";
+import { useNavigate, useLocation } from "react-router-dom";
+import { DatePicker, Space, InputNumber } from "antd";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import locale from "antd/es/date-picker/locale/zh_CN";
@@ -21,6 +14,8 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import moment from "moment";
 import { reactLocalStorage } from "reactjs-localstorage";
 import Head from "./head";
+import Footer from "./footer";
+import axios from "axios";
 
 const Order = () => {
   dayjs.extend(customParseFormat);
@@ -57,11 +52,8 @@ const Order = () => {
   });
 
   const [roomNum, setNum] = useState(0);
-
   const [date, setDate] = useState([]);
-
   const [total, setTotal] = useState(0);
-
   const [maxNum, setMax] = useState(0);
   const maxNumRef = useRef(maxNum);
   maxNumRef.current = maxNum;
@@ -75,9 +67,7 @@ const Order = () => {
   userMoneyRef.current = userMoney;
 
   const [inventoryId, setinventoryId] = useState();
-
   const location = useLocation();
-
   const hotelId = location.pathname.split("/")[2];
 
   useEffect(() => {
@@ -133,7 +123,6 @@ const Order = () => {
       /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/; //11位手机号码正则
     if (!guest.guestTel || !guest.guestTel.match(reg_tel))
       return alert("请填写正确的电话号码");
-    // if (!guest.guestTel) return alert("请填写电话号码");
     if (userMoneyRef.current < total) return alert("您的余额不足！");
     console.log("****" + currentUser.user_id);
     // 创建订单
@@ -152,7 +141,6 @@ const Order = () => {
         create_time: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
         price: total,
       });
-      console.log("---" + res.data.insertId);
       setOrderId(res.data.insertId);
     } catch (err) {
       console.log(err);
@@ -174,7 +162,7 @@ const Order = () => {
   return (
     <div style={{ backgroundColor: "rgb(246, 248, 250)" }}>
       <Head></Head>
-      <div style={{ width: "90%", margin: "0 auto" }}>
+      <div style={{ width: "90%", margin: "0 auto", marginBottom: 20 }}>
         <Card style={{ border: "none", marginTop: "20px" }}>
           <Card.Body>
             <p style={{ fontSize: "24px" }}>酒店信息</p>
@@ -305,6 +293,7 @@ const Order = () => {
           </Card.Body>
         </Card>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

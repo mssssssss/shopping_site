@@ -1,43 +1,25 @@
-import React, { useContext } from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
 import Image from "react-bootstrap/Image";
-import Card from "react-bootstrap/Card";
 import InputGroup from "react-bootstrap/InputGroup";
 import { reactLocalStorage } from "reactjs-localstorage";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-// import { UserContext } from "../context/userContext";
 import LazyLoad from "react-lazyload";
-import holderImg from "../assets/placeholder.gif";
-import logo from "../assets/images/logo.jpg";
+import holderImg from "../../assets/images/placeholder.gif";
 import { NavLink } from "react-router-dom";
-import { UserOutlined } from "@ant-design/icons";
-import "../assets/css/header.css";
-import {
-  Layout,
-  Avatar,
-  Dropdown,
-  Space,
-  theme,
-  Breadcrumb,
-  Input,
-} from "antd";
-import Head from "./head";
-import "./index.css";
 import { LikeOutlined } from "@ant-design/icons";
-import { Divider, Tag, Rate, List } from "antd";
+import { Tag, Rate, List } from "antd";
+import Head from "./head";
+import Footer from "./footer";
+import "../../assets/css/header.css";
+import "../../assets/css/index.css";
 
 const Hotel = () => {
-  const { Search } = Input;
   const [hotels, setHotels] = useState([]);
   const [inputs, setInputs] = useState({
     hotelName: "",
@@ -70,7 +52,6 @@ const Hotel = () => {
     try {
       console.log("input", inputs);
       const res = await axios.post("/api/hotel/search", inputs);
-      // const res = await axios.post("/api/hotel/search", value);
       console.log("data", res.data);
       setHotels(res.data);
     } catch (err) {
@@ -143,7 +124,7 @@ const Hotel = () => {
         </Form>
       </div>
       <List
-        style={{ marginLeft: 20 }}
+        style={{ marginLeft: 20, marginBottom: 20 }}
         itemLayout="vertical"
         size="large"
         pagination={{
@@ -154,19 +135,12 @@ const Hotel = () => {
         renderItem={(hotel) => (
           <List.Item>
             <div style={{ display: "flex" }}>
+              {/* 懒加载图片 */}
               <LazyLoad
-                placeholder={
-                  <img
-                    // width="100%"
-                    // width="20rem"
-                    height="9rem"
-                    src={holderImg}
-                    alt="logo"
-                  />
-                }
+                placeholder={<img height="9rem" src={holderImg} alt="logo" />}
               >
                 <Image
-                  src={require(`../img/${hotel.image_src}/1.jpg`)}
+                  src={require(`../../assets/images/${hotel.image_src}/1.jpg`)}
                   thumbnail
                   style={{
                     // width: "100%",
@@ -181,8 +155,6 @@ const Hotel = () => {
                   style={{
                     fontSize: "20px",
                     marginTop: "10px",
-                    // height: 30,
-                    // lineHeight: "30px",
                   }}
                 >
                   <span
@@ -253,6 +225,7 @@ const Hotel = () => {
           </List.Item>
         )}
       />
+      <Footer></Footer>
     </div>
   );
 };

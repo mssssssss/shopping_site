@@ -1,14 +1,13 @@
 import React from "react";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { useNavigate } from "react-router-dom";
-
-import logo from "../assets/images/logo.jpg";
 import { NavLink } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
-import "../assets/css/header.css";
-import { Layout, Avatar, Dropdown, Space, theme } from "antd";
-import userPic from "../assets/images/head.jpg";
-import { getItem } from "../utils/formLayout";
+import { Avatar, Dropdown, Space } from "antd";
+import "../../assets/css/header.css";
+import userPic from "../../assets/images/head.jpg";
+import logo from "../../assets/images/logo.jpg";
+import { getItem } from "../../utils/formLayout";
 
 export default function Head() {
   const token = JSON.stringify(reactLocalStorage.getObject("token")) !== "{}";
@@ -25,7 +24,8 @@ export default function Head() {
       return;
     } else {
       // 编程式跳转到某个路由
-      navigate("/user", { replace: true }); //跳转到对应路由
+      // navigate("/user"); //跳转到对应路由
+      window.location.href = "/user";
     }
   };
   return (

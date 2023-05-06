@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
 import React from "react";
-// import Index from "../components/user/index";
-import Index from "../pages/index";
 import withLoading from "../utils/withLoading";
+import Index from "../components/user/index";
 // 懒加载路由
+// const Index = React.lazy(() => import("../components/user/index"));
 const Register = React.lazy(() => import("../components/public/register"));
 const Login = React.lazy(() => import("../components/public/login"));
 const NotFound = React.lazy(() => import("../components/public/notFound"));
@@ -12,9 +12,9 @@ const UserManage = React.lazy(() => import("../components/admin/userManage"));
 const OrderManage = React.lazy(() => import("../components/admin/orderManage"));
 const PersonInfo = React.lazy(() => import("../components/public/personInfo"));
 const OrderInfo = React.lazy(() => import("../components/user/orderInfo"));
-const Detail = React.lazy(() => import("../pages/detail"));
-const Order = React.lazy(() => import("../pages/order"));
-const Pay = React.lazy(() => import("../pages/pay"));
+const Detail = React.lazy(() => import("../components/user/detail"));
+const Order = React.lazy(() => import("../components/user/order"));
+const Pay = React.lazy(() => import("../components/user/pay"));
 
 // 路由配置信息
 const routes = [
@@ -56,6 +56,7 @@ const routes = [
     name: "order",
     path: "/order/:id",
     component: withLoading(<Order />),
+    // 需要鉴权 且访问权限为0，即只有登录用户可访问
     need: true,
     permission: 0,
   },
@@ -116,13 +117,11 @@ const routes = [
         name: "用户管理",
         path: "userManage",
         component: withLoading(<UserManage />),
-        isSubMenu: true, //标记为 是侧边栏菜单
       },
       {
         name: "订单管理",
         path: "orderManage",
         component: withLoading(<OrderManage />),
-        isSubMenu: true,
       },
       {
         name: "个人信息",

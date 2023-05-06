@@ -2,20 +2,16 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Navbar from "react-bootstrap/Navbar";
-import { useNavigate, useLocation, Link, Navigate } from "react-router-dom";
-import { useEffect, useContext, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
 import axios from "axios";
-import { UserContext } from "../context/userContext";
 import { reactLocalStorage } from "reactjs-localstorage";
-import { Divider, message } from "antd";
+import { message } from "antd";
 import Head from "./head";
+import Footer from "./footer";
 
 const Pay = () => {
   const navigate = useNavigate();
-  // const { currentUser } = useContext(UserContext);
   let [currentUser, setUser] = useState({});
   const username = reactLocalStorage.getObject("token");
   async function getCur() {
@@ -41,8 +37,6 @@ const Pay = () => {
   const orderId = location.pathname.split("/")[2];
 
   const [order, setOrder] = useState([]);
-  const [hotel, setHotel] = useState([]);
-  // const [state, setState] = useState();
   const [userMoney, setUserMoney] = useState();
   const userMoneyRef = useRef(userMoney);
   userMoneyRef.current = userMoney;
@@ -52,7 +46,6 @@ const Pay = () => {
       try {
         const res = await axios.get(`/api/order/${orderId}`);
         setOrder(res.data);
-        // setState(res.data.order_state);
       } catch (err) {
         console.log(err);
       }
@@ -121,8 +114,6 @@ const Pay = () => {
           border: "none",
           backgroundColor: "rgb(246, 248, 250)",
           paddingTop: "20px",
-          // marginBottom: "-50px",
-          height: "calc(100% - 95px)",
         }}
       >
         <Card.Body>
@@ -155,7 +146,7 @@ const Pay = () => {
                 padding: "20px",
                 borderRadius: "15px",
                 marginTop: "25px",
-                marginBottom: "62px",
+                marginBottom: "18px",
               }}
             >
               <h3>付款信息确认：</h3>
@@ -173,7 +164,8 @@ const Pay = () => {
 
               <div style={{ height: 60, lineHeight: "60px" }}>
                 <Button
-                  variant="light"
+                  // variant="light"
+                  variant="dark"
                   onClick={handleCancel}
                   style={{ marginRight: "15px" }}
                 >
@@ -187,6 +179,7 @@ const Pay = () => {
           </Container>
         </Card.Body>
       </Card>
+      <Footer></Footer>
     </div>
   );
 };

@@ -34,17 +34,21 @@ export default function OrderInfo() {
     {
       key: "2",
       label: `待付款`,
-      children: <OrderList type="pay"></OrderList>,
+      children: <OrderList type="pay" amount={[amount, setAmount]}></OrderList>,
     },
     {
       key: "3",
       label: `已完成`,
-      children: <OrderList type="finish"></OrderList>,
+      children: (
+        <OrderList type="finish" amount={[amount, setAmount]}></OrderList>
+      ),
     },
     {
       key: "4",
       label: `已取消`,
-      children: <OrderList type="cancel"></OrderList>,
+      children: (
+        <OrderList type="cancel" amount={[amount, setAmount]}></OrderList>
+      ),
     },
   ];
 
@@ -67,6 +71,7 @@ export default function OrderInfo() {
   const showModal = () => {
     setIsModalOpen(true);
   };
+
   const handleOk = () => {
     // 充值
     form.validateFields().then(async () => {
@@ -92,6 +97,7 @@ export default function OrderInfo() {
         });
     });
   };
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };

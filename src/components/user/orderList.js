@@ -90,8 +90,9 @@ export default function OrderList({ type, amount }) {
   // 要判断当前余额是否足够支付订单金额
   function payOrder(id, needPay) {
     console.log(id);
-    console.log("当前余额", amount[0]);
     console.log("需要支付", needPay);
+    console.log("当前余额", amount[0]);
+
     // 如果当前余额够支付
     if (amount[0] >= needPay) {
       // 支付订单
@@ -159,7 +160,7 @@ export default function OrderList({ type, amount }) {
                     item.room_num}
                 </span>
               </div>
-              {/* 如果订单为未支付的状态，则可以显示支付和取消的按钮 */}
+              {/* 如果订单为待付款/未支付的状态，则可以显示支付和取消的按钮 */}
               {item.order_state === 0 ? (
                 <div style={{ marginTop: 40, marginBottom: 10 }}>
                   <Popconfirm

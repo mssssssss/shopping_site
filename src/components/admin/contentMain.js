@@ -11,8 +11,6 @@ function ContentMain() {
   // 找管理员的子路由信息
   let adminRoutes = (
     <Routes>
-      {/* 进入后台页面/admin 默认首先显示用户管理/admin/userManage  */}
-      {/* !!! 不能带前缀/admin */}
       {routes
         .filter((item) => item.name === "admin")[0]
         .children.map((route) => (

@@ -1,15 +1,7 @@
 // 路由配置
 import { routes } from "./routes";
 import { reactLocalStorage } from "reactjs-localstorage";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
-import { CloseCircleOutlined } from "@ant-design/icons";
-import { Button, Result } from "antd";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotAuth from "../components/public/notAuth";
 
 export default function MyRouter() {
@@ -20,10 +12,6 @@ export default function MyRouter() {
   console.log("token=", token);
   console.log("role=", role);
   // 注册路由
-  // const navigate = useNavigate();
-  // function toHome() {
-  //   navigate("/index");
-  // }
   return (
     <BrowserRouter>
       <Routes>
@@ -37,14 +25,15 @@ export default function MyRouter() {
               !route.need || (token && route.permission === role) ? (
                 route.component
               ) : (
-                // 否则 要先登录才能访问
-                // message.error("请先登录")
-                // <Navigate to="/login"></Navigate>
+                // 否则 显示未被授权组件
+                // 要先登录才能访问
                 <NotAuth></NotAuth>
               )
             }
           >
-            {route.children
+            {/* 注册当前用户对应的子路由 */}
+            {route.children &&
+            (!route.need || (token && route.permission === role))
               ? route.children.map((item) => (
                   <Route
                     name={item.name}

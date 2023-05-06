@@ -17,7 +17,7 @@ export default function NotFound() {
       >
         <Button
           style={{ position: "absolute", bottom: 50 }}
-          ghost
+          // ghost
           shape="round"
           href="/"
         >
